@@ -1,0 +1,415 @@
+Compare Rate<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Project</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="node_modules/mdi/css/materialdesignicons.min.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script>var baseSym,comSym,cons=1000,rate;
+  var obj=angular.module("app",[]);
+  obj.controller("cont",function($scope,$http){
+
+window.setInterval(function(){
+$scope.base=baseSym;$scope.com=comSym;
+if($scope.base!=undefined&&$scope.com!=undefined){cons=0; call();}
+}, cons);
+
+      function call(){$http.get("http://api.fixer.io/latest?from="+$scope.base+"&to="+$scope.com+"&amount="+rate).then(function(response1){
+         //console.log(baseSym);
+       $scope.dat=response1.data;
+     });}
+
+$scope.data=[];
+    	var date = new Date();
+      var d = date.getDate();
+  var m = date.getMonth()+1;
+
+  var y = date.getFullYear();
+
+//var dateF = String(y+'-'+m+'-'+d);
+      //console.log(dateF);
+    for(var i=0;i<5;i++)  {
+      if(d<10)
+        d='0'+d;
+      if(m<10)
+        m='0'+m;
+if(m<1){m=12;y--;}
+  var dateF = String(y+'-'+m+'-'+d);
+     $http.get("http://api.fixer.io/"+dateF).then(function(response){
+      $scope.data.push(response.data);
+    });console.log(dateF);
+    m=(+m)-1;
+  }
+
+  });
+  </script>
+</head>
+
+<body ng-app="app" ng-controller="cont">
+  <div class="body-wrapper">
+    <!-- partial:partials/_sidebar.html -->
+    <aside class="mdc-persistent-drawer mdc-persistent-drawer--open">
+      <nav class="mdc-persistent-drawer__drawer">
+        <div class="mdc-persistent-drawer__toolbar-spacer">
+          <a href="index.html" class="brand-logo">
+						<img src="images/logo.png" alt="logo">
+					</a>
+        </div>
+        <div class="mdc-list-group">
+          <nav class="mdc-list mdc-drawer-menu">
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="index.html">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">desktop_mac</i>
+                Dashboard
+              </a>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="ui-sub-menu">
+              <a class="mdc-drawer-link" href="#">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">dashboard</i>
+                UI Features
+                <i class="mdc-drawer-arrow material-icons">arrow_drop_down</i>
+              </a>
+              <div class="mdc-expansion-panel" id="ui-sub-menu">
+                <nav class="mdc-list mdc-drawer-submenu">
+
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="pages/ui-features/typography.html">
+                      Typography
+                    </a>
+                  </div>
+                </nav>
+              </div>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="pages/ui-features/tables.html">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">grid_on</i>
+                Tables
+              </a>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="pages/charts/chartjs.html">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pie_chart_outlined</i>
+                Charts
+              </a>
+            </div>
+
+          </nav>
+        </div>
+      </nav>
+    </aside>
+    <!-- partial -->
+    <!-- partial:partials/_navbar.html -->
+    <header class="mdc-toolbar mdc-elevation--z4 mdc-toolbar--fixed">
+      <div class="mdc-toolbar__row">
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+          <a href="#" class="menu-toggler material-icons mdc-toolbar__menu-icon">menu</a>
+          <span class="mdc-toolbar__input">
+            <div class="mdc-text-field">
+                </div>
+          </span>
+        </section>
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
+          <div class="mdc-menu-anchor">
+            <a href="#" class="mdc-toolbar__icon toggle mdc-ripple-surface" data-toggle="dropdown" toggle-dropdown="notification-menu" data-mdc-auto-init="MDCRipple">
+              <i class="material-icons">notifications</i>
+              <span class="dropdown-count">3</span>
+            </a>
+            <div class="mdc-simple-menu mdc-simple-menu--right" tabindex="-1" id="notification-menu">
+              <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                <li class="mdc-list-item" role="menuitem" tabindex="0">
+                  <i class="material-icons mdc-theme--primary mr-1">email</i>
+                  One unread message
+                </li>
+                <li class="mdc-list-item" role="menuitem" tabindex="0">
+                  <i class="material-icons mdc-theme--primary mr-1">group</i>
+                  One event coming up
+                </li>
+                <li class="mdc-list-item" role="menuitem" tabindex="0">
+                  <i class="material-icons mdc-theme--primary mr-1">cake</i>
+                  It's Aleena's birthday!
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="mdc-menu-anchor">
+            <a href="#" class="mdc-toolbar__icon mdc-ripple-surface" data-mdc-auto-init="MDCRipple">
+              <i class="material-icons">widgets</i>
+            </a>
+          </div>
+          <div class="mdc-menu-anchor mr-1">
+            <a href="#" class="mdc-toolbar__icon toggle mdc-ripple-surface" data-toggle="dropdown" toggle-dropdown="logout-menu" data-mdc-auto-init="MDCRipple">
+              <i class="material-icons">more_vert</i>
+            </a>
+            <div class="mdc-simple-menu mdc-simple-menu--right" tabindex="-1" id="logout-menu" onclick="window.open('', '_self', ''); window.close();">
+                <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                  <li class="mdc-list-item" role="menuitem" tabindex="0">
+                    <i class="material-icons mdc-theme--primary mr-1">settings</i>
+                    Settings
+                  </li>
+                </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </header>
+    <!-- partial -->
+    <div class="page-wrapper mdc-toolbar-fixed-adjust">
+      <main class="content-wrapper">
+        <div class="mdc-layout-grid">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+              <div class="mdc-card">
+                <!-- <div class="mdc-layout-grid__inner">
+                  <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-7">
+                    <section class="purchase__card_section">
+                      <p>Like what you see? Check out our premium version for more.</p>
+                    </section>
+                  </div>
+                  <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-5">
+                    <section class="purchase__card_section d-flex align-item-center">
+                      <a href=" https://themewagon.com/themes/free-material-admin-template/" target="_blank" class="mdc-button mdc-button--stroked mdc-button--dense" data-mdc-auto-init="MDCRipple">
+                        download free version
+                      </a>
+                      <a href=" https://themewagon.com/themes/free-material-admin-template/" target="_blank" class="mdc-button mdc-button--raised mdc-button--dense" data-mdc-auto-init="MDCRipple">
+                        purchase
+                      </a>
+                    </section>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-8">
+              <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6">
+                  <div class="mdc-card py-3 pl-2 d-flex flex-row align-item-center">
+                    <div id="compareRates"></div>
+                    <div class="mdc--tile mdc--tile-danger rounded">
+                        <img src="eq.png" height=50>
+                      <!-- <i class="mdi mdi-account-settings text-white icon-md"></i> -->
+                    </div>
+                    <div class="text-wrapper pl-1">
+                      <h3 class="mdc-typography--display1 font-weight-bold mb-1">Compare</h3>
+                      <p class="font-weight-normal mb-0 mt-0"
+                            onclick="backConvert();document.getElementsByClassName('mdc--tile mdc--tile-danger rounded')[0].style.visibility='hidden';
+                              document.getElementsByClassName('text-wrapper pl-1')[0].style.visibility='hidden';
+                              document.getElementById('compareRates').innerHTML=`
+                              <input type='text' id='baseSym' placeholder='Base' style='width:150px;height:50px'> &nbsp;
+                              <input type='text' id='comSym' placeholder='Currency' style='width:150px;height:50px'>&nbsp;
+                              <input type='button' id='comSym' onclick='compare()' value='COMPARE' style='background-color:#00a9f4;width:150px;height:25px;color:white'>
+
+                              <br>
+                              <br><br>
+                              <div id='setConVal'></div>
+                              <br><br><br>
+                                  <img src='back.png' height=50 onclick='backCompare()'>
+
+
+                              `;
+
+
+                            ">click here</p><script>
+                            function compare(){
+                              rate = 1;
+                              baseSym = document.getElementById('baseSym').value;
+                              comSym = document.getElementById('comSym').value;
+
+                              window.setInterval(function(){
+                                //if(document.getElementById('compareVal').innerHTML)
+                                  document.getElementById('setConVal').innerHTML=document.getElementById('compareVal').innerHTML;
+                              // console.log(baseSym + comSym);
+                            },1000);}
+                            function backCompare(){
+                              document.getElementById('compareRates').innerHTML='';
+                              document.getElementsByClassName('mdc--tile mdc--tile-danger rounded')[0].style.visibility='visible';
+                              document.getElementsByClassName('text-wrapper pl-1')[0].style.visibility='visible';
+                            }</script>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6">
+                  <div class="mdc-card py-3 pl-2 d-flex flex-row align-item-center">
+
+                      <div id="convertRates"></div>
+                    <div class="mdc--tile mdc--tile-success rounded">
+                        <img src="co.png" height=50>
+                      <!-- <i class="mdi mdi-basket text-white icon-md"></i> -->
+                    </div>
+                    <div class="text-wrapper pl-1">
+                      <h3 class="mdc-typography--display1 font-weight-bold mb-1">Convert</h3>
+                      <p class="font-weight-normal mb-0 mt-0"
+                        onclick="backCompare();document.getElementsByClassName('mdc--tile mdc--tile-success rounded')[0].style.visibility='hidden';
+                        document.getElementsByClassName('text-wrapper pl-1')[1].style.visibility='hidden';
+                        document.getElementById('convertRates').innerHTML=`
+                        <input type='text' id='baseSym' placeholder='Base' style='width:150px;height:50px'> &nbsp;
+                        <input type='text' id='comSym' placeholder='Currency' style='width:150px;height:50px'>&nbsp;
+                        <input type='text' id='ratex' placeholder='Rate' style='width:150px;height:50px'><br>&nbsp;
+                        <input type='button' id='comSym' onclick='convert()' value='CONVERT' style='background-color:#00a9f4;width:150px;height:25px;color:white'>
+
+                        <br><br><div id='toCon'>
+                        <div id='setConVal'></div></div>
+                        <br><br><br>
+                            <img src='back.png' height=50 onclick='backConvert()'>
+
+
+                        `;
+
+
+                      ">click here</p><script>
+                      function convert(){
+                        rate = document.getElementById('ratex').value;
+                        baseSym = document.getElementById('baseSym').value;
+                        comSym = document.getElementById('comSym').value;
+                        document.getElementById('setConVal').style.visibility='visible';
+
+                        window.setInterval(function(){
+                          if(document.getElementById('compareVal').innerHTML){
+                              document.getElementById('setConVal').innerHTML=document.getElementById('compareVal').innerHTML;
+
+                          }
+                      },1000.0/50.0);}
+                      function backConvert(){
+                         // if(+(document.getElementById('setConVal').innerHTML))
+                         //   document.getElementById('setConVal').style.visibility='hidden';
+                        document.getElementById('convertRates').innerHTML='';
+                        document.getElementsByClassName('mdc--tile mdc--tile-success rounded')[0].style.visibility='visible';
+                        document.getElementsByClassName('text-wrapper pl-1')[1].style.visibility='visible';
+                      }</script>
+                    </div>
+                  </div>
+                </div>
+                <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6">
+                  <div class="mdc-card py-3 pl-2 d-flex flex-row align-item-center">
+                    <div class="mdc--tile mdc--tile-warning rounded">
+                        <img src="gr.png" height=50>
+                      <!-- <i class="mdi mdi-ticket text-white icon-md"></i> -->
+                    </div>
+                    <div class="text-wrapper pl-1">
+                      <h3 class="mdc-typography--display1 font-weight-bold mb-1">Graphs</h3>
+                      <p class="font-weight-normal mb-0 mt-0" onclick="location='pages/charts/chartjs.html';">click here</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6">
+                  <div class="mdc-card py-3 pl-2 d-flex flex-row align-item-center">
+                    <div class="mdc--tile mdc--tile-primary rounded">
+                        <img src="ch.png" height=50>
+
+                      <!-- <i class="mdi mdi-account-star text-white icon-md">C</i> -->
+                    </div>
+                    <div class="text-wrapper pl-1">
+                      <h3 class="mdc-typography--display1 font-weight-bold mb-1">Tables</h3>
+                      <p class="font-weight-normal mb-0 mt-0" onclick="location='pages/ui-features/tables.html'">click here</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-4">
+              <div class="mdc-card d-flex flex-column">
+                <div class="mdc-layout-grid__inner flex-grow-1">
+                  <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-3"></div>
+                  <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6 d-flex align-item-center flex-column">
+                    <h2 class="mdc-card__title mdc-card__title--large text-center mt-2 mb-2">Our Predicted Rate</h2>
+                    <div id="currentBalanceCircle" class="w-100"></div>
+                  </div>
+                  <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-3"></div>
+                </div>
+                <div class="mdc-layout-grid__inner">
+                  <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+                    <section class="mdc-card__action-footer mt-4 bg-red w-100">
+
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-4">
+                </div>
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+              <div class="mdc-card table-responsive">
+                <div class="table-heading px-2 px-1 border-bottom">
+                  <h1 class="mdc-card__title mdc-card__title--large">Rate status
+
+                <div ng-repeat="x in dat.rates" style="visibility:hidden">
+                <div id="compareVal">{{x}}</div>
+                </div>
+                </div>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>USD</th>
+                      <th>INR</th>
+                      <th>AUD</th>
+                      <th>BGN</th>
+                      <th>CAD</th>
+                      <th>JPY</th>
+                      <th>RUB</th>
+                      <th>CHF</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="ix in data">
+                      <td>{{ix.rates.USD}}</td>
+                      <td>{{ix.rates.INR}}</td>
+                      <td>{{ix.rates.AUD}}</td>
+                      <td>{{ix.rates.BGN}}</td>
+                      <td>{{ix.rates.CAD}}</td>
+                      <td>{{ix.rates.JPY}}</td>
+                      <td>{{ix.rates.RUB}}</td>
+                      <td>{{ix.rates.CHF}}
+                    <tr>
+
+                    </tbody>
+                  </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main><span ng-repeat="i in data">
+      </span>
+      <!-- partial:partials/_footer.html -->
+      <footer>
+        <div class="mdc-layout-grid">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6">
+              <span class="text-muted">Copyright © 2018 <a class="text-green" href="#" target="_blank">TEAM CSE</a>. All rights reserved.</span>
+            </div>
+
+          </div>
+        </div>
+      </footer>
+      <!-- partial -->
+    </div>
+  </div>
+  <!-- body wrapper -->
+  <!-- plugins:js -->
+  <script src="node_modules/material-components-web/dist/material-components-web.min.js"></script>
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <script src="node_modules/chart.js/dist/Chart.min.js"></script>
+  <script src="node_modules/progressbar.js/dist/progressbar.min.js"></script>
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="js/misc.js"></script>
+  <script src="js/material.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="js/dashboard.js"></script>
+  <!-- End custom js for this page-->
+</body>
+
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Project</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="../../node_modules/mdi/css/materialdesignicons.min.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="../../css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="../../images/favicon.png" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script>var baseSym,comSym,cons=1000,rate;
+  var obj=angular.module("app",[]);
+  obj.controller("cont",function($scope,$http){
+
+      var date = new Date();
+      var d = date.getDate();
+  var m = date.getMonth()+1;
+
+  var y = date.getFullYear();
+
+  var d1 = date.getDate();
+var m1 = date.getMonth()+1;
+
+var y1 = date.getFullYear();
+
+//var dateF = String(y+'-'+m+'-'+d);
+      //console.log(dateF);
+      //year
+  $scope.change1=function(){
+
+    $scope.data=[];$scope.datam=[];
+     for(var i=0;i<12;i++)  {
+
+        d = ("0" + (+d)).slice(-2);
+        m = ("0" + (+m)).slice(-2);
+if(m<1){m=12;y--;}
+  var dateF = String(y+'-'+m+'-'+d);
+     $http.get("http://api.fixer.io/"+dateF+"?base="+$scope.base).then(function(response){
+      $scope.data.push(response.data);
+    });//console.log(dateF);
+    m=(+m)-1;
+  }
+  //month
+  for(var j=0;j<31;j++)  {
+if((+d1)<1){d1=31;+m1--;}
+if((+m1) == 2){ d1 = 28+(((+y1)%4)==0);}
+else if((+m1)<1){m1=12;+y1--;}
+
+  d1 = ("0" + (+d1)).slice(-2);
+  m1 = ("0" + (+m1)).slice(-2);
+var dateF1 = String(y1+'-'+m1+'-'+d1);
+   $http.get("http://api.fixer.io/"+dateF1+"?base="+$scope.base).then(function(response1){
+    $scope.datam.push(response1.data);
+  });//console.log(dateF1);
+  d1=(+d1)-1;
+}}
+
+  });
+  </script>
+</head>
+
+<body ng-app="app" ng-controller="cont">
+  <div class="body-wrapper">
+    <!-- partial:../../partials/_sidebar.html -->
+    <aside class="mdc-persistent-drawer mdc-persistent-drawer--open">
+      <nav class="mdc-persistent-drawer__drawer">
+        <div class="mdc-persistent-drawer__toolbar-spacer">
+          <a href="../../index.html" class="brand-logo">
+						<img src="../../images/logo.png" alt="logo">
+					</a>
+        </div>
+        <div class="mdc-list-group">
+          <nav class="mdc-list mdc-drawer-menu">
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="../../index.html">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">desktop_mac</i>
+                Dashboard
+              </a>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="ui-sub-menu">
+              <a class="mdc-drawer-link" href="#">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">dashboard</i>
+                UI Features
+                <i class="mdc-drawer-arrow material-icons">arrow_drop_down</i>
+              </a>
+              <div class="mdc-expansion-panel" id="ui-sub-menu">
+                <nav class="mdc-list mdc-drawer-submenu">
+
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="../../pages/ui-features/typography.html">
+                      Typography
+                    </a>
+                  </div>
+                </nav>
+              </div>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="../../pages/ui-features/tables.html">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">grid_on</i>
+                Tables
+              </a>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="../../pages/charts/chartjs.html">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pie_chart_outlined</i>
+                Charts
+              </a>
+            </div>
+
+          </nav>
+        </div>
+      </nav>
+    </aside>
+    <!-- partial -->
+    <!-- partial:../../partials/_navbar.html -->
+    <header class="mdc-toolbar mdc-elevation--z4 mdc-toolbar--fixed">
+      <div class="mdc-toolbar__row">
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+          <a href="#" class="menu-toggler material-icons mdc-toolbar__menu-icon">menu</a>
+          <span class="mdc-toolbar__input">
+
+          </span>
+        </section>
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
+          <div class="mdc-menu-anchor">
+            <a href="#" class="mdc-toolbar__icon toggle mdc-ripple-surface" data-toggle="dropdown" toggle-dropdown="notification-menu" data-mdc-auto-init="MDCRipple">
+              <i class="material-icons">notifications</i>
+              <span class="dropdown-count">3</span>
+            </a>
+            <div class="mdc-simple-menu mdc-simple-menu--right" tabindex="-1" id="notification-menu">
+              <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                <li class="mdc-list-item" role="menuitem" tabindex="0">
+                  <i class="material-icons mdc-theme--primary mr-1">email</i>
+                  One unread message
+                </li>
+                <li class="mdc-list-item" role="menuitem" tabindex="0">
+                  <i class="material-icons mdc-theme--primary mr-1">group</i>
+                  One event coming up
+                </li>
+                <li class="mdc-list-item" role="menuitem" tabindex="0">
+                  <i class="material-icons mdc-theme--primary mr-1">cake</i>
+                  It's Aleena's birthday!
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="mdc-menu-anchor">
+            <a href="#" class="mdc-toolbar__icon mdc-ripple-surface" data-mdc-auto-init="MDCRipple">
+              <i class="material-icons">widgets</i>
+            </a>
+          </div>
+          <div class="mdc-menu-anchor mr-1">
+            <a href="#" class="mdc-toolbar__icon toggle mdc-ripple-surface" data-toggle="dropdown" toggle-dropdown="logout-menu" data-mdc-auto-init="MDCRipple">
+              <i class="material-icons">more_vert</i>
+            </a>
+            <div class="mdc-simple-menu mdc-simple-menu--right" tabindex="-1" id="logout-menu">
+                <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                  <li class="mdc-list-item" role="menuitem" tabindex="0">
+                    <i class="material-icons mdc-theme--primary mr-1">settings</i>
+                    Settings
+                  </li>
+                </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </header>
+    <!-- partial -->
+    <div class="page-wrapper mdc-toolbar-fixed-adjust">
+      <main class="content-wrapper">
+        <div class="mdc-layout-grid">
+					<div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+							<div class="mdc-card">
+								<section class="mdc-card__primary">
+									<h1 class="mdc-card__title mdc-card__title--large">Year Table Base:<input type="text"  ng-model="base" placeholder="ENTER BASE" ng-change="change1()"></h1>
+								</section>
+                <div class="template-demo">
+                  <table class="table">
+                  <thead>
+                    <tr>
+                      <th>USD</th>
+                      <th>INR</th>
+                      <th>AUD</th>
+                      <th>BGN</th>
+                      <th>CAD</th>
+                      <th>JPY</th>
+                      <th>RUB</th>
+                      <th>CHF</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="i1 in data">
+                      <td>{{i1.rates.USD}}</td>
+                      <td>{{i1.rates.INR}}</td>
+                      <td>{{i1.rates.AUD}}</td>
+                      <td>{{i1.rates.BGN}}</td>
+                      <td>{{i1.rates.CAD}}</td>
+                      <td>{{i1.rates.JPY}}</td>
+                      <td>{{i1.rates.RUB}}</td>
+                      <td>{{i1.rates.CHF}}</td>
+                    <tr>
+
+                    </tbody>
+                  </table>
+                </div>
+							</div>
+
+
+            </div>
+					</div>
+				</div>        <div class="mdc-layout-grid">
+        					<div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-12">
+        							<div class="mdc-card">
+        								<section class="mdc-card__primary">
+        									<h1 class="mdc-card__title mdc-card__title--large">Month Table Base:<input type="text" placeholder="ENTER BASE"  ng-model="base" ng-change="change1()"></h1>
+        								</section>
+                        <div class="template-demo">
+                          <table class="table">
+                          <thead>
+                            <tr>
+                              <th>USD</th>
+                              <th>INR</th>
+                              <th>AUD</th>
+                              <th>BGN</th>
+                              <th>CAD</th>
+                              <th>JPY</th>
+                              <th>RUB</th>
+                              <th>CHF</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="i in datam">
+                              <td>{{i.rates.USD}}</td>
+                              <td>{{i.rates.INR}}</td>
+                              <td>{{i.rates.AUD}}</td>
+                              <td>{{i.rates.BGN}}</td>
+                              <td>{{i.rates.CAD}}</td>
+                              <td>{{i.rates.JPY}}</td>
+                              <td>{{i.rates.RUB}}</td>
+                              <td>{{i.rates.CHF}}</td>
+                            <tr>
+
+                            </tbody>
+                          </table>
+                        </div>
+        							</div>
+
+
+                    </div>
+        					</div>
+        				</div>
+      </main>
+      <!-- partial:../../partials/_footer.html -->
+      <footer>
+        <div class="mdc-layout-grid">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6">
+              <span class="text-muted">Copyright © 2018 <a class="text-green" href="#" target="_blank">TEAM CSE</a>. All rights reserved.</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- partial -->
+    </div>
+
+  </div>
+  <!-- body wrapper -->
+  <!-- plugins:js -->
+  <script src="../../node_modules/material-components-web/dist/material-components-web.min.js"></script>
+  <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+	<script src="../../js/misc.js"></script>
+	<script src="../../js/material.js"></script>
+	<!-- endinject -->
+  <!-- Custom js for this page-->
+  <!-- End custom js for this page-->
+</body>
+
+</html>

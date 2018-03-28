@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Project</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="../../node_modules/mdi/css/materialdesignicons.min.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="../../css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="../../images/favicon.png" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+
+<body ng-app="rate" ng-controller="cont" >
+ <div class="container">
+  <h2>{{data.base}}</h2>
+  <div>
+  </div>
+</div>
+  <div class="body-wrapper">
+    <!-- partial:../../partials/_sidebar.html -->
+    <aside class="mdc-persistent-drawer mdc-persistent-drawer--open">
+      <nav class="mdc-persistent-drawer__drawer">
+        <div class="mdc-persistent-drawer__toolbar-spacer">
+          <a href="../../index.html" class="brand-logo">
+						<img src="../../images/logo.png" alt="logo">
+					</a>
+        </div>
+        <div class="mdc-list-group">
+          <nav class="mdc-list mdc-drawer-menu">
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="../../index.html">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">desktop_mac</i>
+                Dashboard
+              </a>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="ui-sub-menu">
+              <a class="mdc-drawer-link" href="#">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">dashboard</i>
+                UI Features
+                <i class="mdc-drawer-arrow material-icons">arrow_drop_down</i>
+              </a>
+              <div class="mdc-expansion-panel" id="ui-sub-menu">
+                <nav class="mdc-list mdc-drawer-submenu">
+
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link" href="../../pages/ui-features/typography.html">
+                      Typography
+                    </a>
+                  </div>
+                </nav>
+              </div>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="../../pages/ui-features/tables.html">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">grid_on</i>
+                Tables
+              </a>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="../../pages/charts/chartjs.html">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true">pie_chart_outlined</i>
+                Charts
+              </a>
+            </div>
+
+          </nav>
+        </div>
+      </nav>
+    </aside>
+    <!-- partial -->
+    <!-- partial:../../partials/_navbar.html -->
+
+    <header class="mdc-toolbar mdc-elevation--z4 mdc-toolbar--fixed">
+      <div class="mdc-toolbar__row">
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+          <a href="#" class="menu-toggler material-icons mdc-toolbar__menu-icon">menu</a>
+          <span class="mdc-toolbar__input">
+
+          </span>
+        </section>
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
+          <div class="mdc-menu-anchor">
+            <a href="#" class="mdc-toolbar__icon toggle mdc-ripple-surface" data-toggle="dropdown" toggle-dropdown="notification-menu" data-mdc-auto-init="MDCRipple">
+              <i class="material-icons">notifications</i>
+              <span class="dropdown-count">3</span>
+            </a>
+            <div class="mdc-simple-menu mdc-simple-menu--right" tabindex="-1" id="notification-menu">
+              <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                <li class="mdc-list-item" role="menuitem" tabindex="0">
+                  <i class="material-icons mdc-theme--primary mr-1">email</i>
+                  One unread message
+                </li>
+                <li class="mdc-list-item" role="menuitem" tabindex="0">
+                  <i class="material-icons mdc-theme--primary mr-1">group</i>
+                  One event coming up
+                </li>
+                <li class="mdc-list-item" role="menuitem" tabindex="0">
+                  <i class="material-icons mdc-theme--primary mr-1">cake</i>
+                  It's Aleena's birthday!
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="mdc-menu-anchor">
+            <a href="#" class="mdc-toolbar__icon mdc-ripple-surface" data-mdc-auto-init="MDCRipple">
+              <i class="material-icons">widgets</i>
+            </a>
+          </div>
+          <div class="mdc-menu-anchor mr-1">
+            <a href="#" class="mdc-toolbar__icon toggle mdc-ripple-surface" data-toggle="dropdown" toggle-dropdown="logout-menu" data-mdc-auto-init="MDCRipple">
+              <i class="material-icons">more_vert</i>
+            </a>
+            <div class="mdc-simple-menu mdc-simple-menu--right" tabindex="-1" id="logout-menu">
+                <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="true">
+                  <li class="mdc-list-item" role="menuitem" tabindex="0">
+                    <i class="material-icons mdc-theme--primary mr-1">settings</i>
+                    Settings
+                  </li>
+                </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </header>
+
+    <!-- partial -->
+    <div class="page-wrapper mdc-toolbar-fixed-adjust">
+      <main class="content-wrapper">
+        <div class="mdc-layout-grid">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+              <div class="mdc-card">
+								<section class="mdc-card__primary">
+									<h1 class="mdc-card__title mdc-card__title--large">Pie chart</h1>
+                  <input type="text" ng-model="base" ng-change="fun()">
+								</section>
+								<section class="mdc-card__supporting-text">
+                  <canvas id="myChart1" style="height:230px"></canvas>
+								</section>
+							</div>
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+              <div class="mdc-card">
+								<section class="mdc-card__primary">
+									<h1 class="mdc-card__title mdc-card__title--large">Bar chart</h1>
+                    <input type="text" ng-model="base" ng-change="fun()">
+								</section>
+								<section class="mdc-card__supporting-text">
+
+                    <canvas id="myChart" style="height:230px"></canvas>
+								</section>
+							</div>
+            </div>
+
+
+          </div>
+        </div>
+      </main>
+      <!-- partial:../../partials/_footer.html -->
+      <footer>
+        <div class="mdc-layout-grid">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6">
+              <span class="text-muted">Copyright © 2018 <a class="text-green" href="#" target="_blank">TEAM CSE</a>. All rights reserved.</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- partial -->
+    </div>
+  </div>
+  <!-- body wrapper -->
+  <!-- plugins:js -->
+  <script src="../../node_modules/material-components-web/dist/material-components-web.min.js"></script>
+  <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <script src="../../node_modules/chart.js/dist/Chart.min.js"></script>
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+	<script src="../../js/misc.js"></script>
+	<script src="../../js/material.js"></script>
+	<!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="../../js/chart.js"></script>
+  <!-- End custom js for this page-->
+</body>
+<script>
+var obj= angular.module("rate",[]);
+obj.controller("cont",function($scope,$http){
+
+$scope.fun=function(){base=$scope.base;
+$http.get("http://api.fixer.io/latest?base="+base).then(function(response){
+$scope.data=response.data;
+x=$scope.data;
+x=x.rates;
+var ctx = document.getElementById('myChart').getContext('2d');
+var ctx1 = document.getElementById('myChart1').getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['AUD', 'EUR', 'INR', 'CAD', 'RUB', 'USD', 'JPY'],
+    datasets: [{
+      label: 'RATES',
+      data: [x.AUD, x.EUR, x.INR, x.CAD, x.RUB, x.USD, x.JPY],
+      backgroundColor: "rgba(153,255,51,0.6)"
+    }]
+  }
+});
+var myChart1 = new Chart(ctx1, {
+  type: 'pie',
+  data: {
+    labels: ['AUD', 'EUR', 'INR', 'CAD', 'RUB', 'USD', 'JPY'],
+    datasets: [{
+      label: 'RATES',
+      data: [x.AUD, x.EUR, x.INR, x.CAD, x.RUB, x.USD, x.JPY],
+      backgroundColor: "rgba(153,255,51,0.6)"
+    }]
+  }
+});
+});}
+});
+</script>
+
+</html>
